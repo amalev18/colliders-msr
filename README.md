@@ -10,12 +10,12 @@ The first simulation conducted was an independent simulation of a possible scena
 
 Following that inital simulation, simulations were further conducted based upon a paper identified from the MSR conference. In addition to the simulations, an analysis using the empirical data from the research paper was also carried out. All material for this can be found in the `msr_paper_analysis` folder. It contains one folder for the simulations, and one for the analysis with the empirical data. In more detail, each folder contains the following:
 
-## `msr_paper_analysis/simulations`
+### `msr_paper_analysis/simulations`
 * `direct_effect.R`: Simulation of the direct causal effect of SR on TR.
 * `total_effect.R`: Simulation of the total causal effect of SR on TR.
 * `investigation_empirical_data.ipynb`: The simulated data was generated with the purpose of capturing characteristics of the real empirical data. This file contains the investigations made on that data.
 
-## `msr_paper_analysis/empirical_analysis`
+### `msr_paper_analysis/empirical_analysis`
 * `empirical_analysis.R`: This file contains the analysis of including collider variables using the empirical data. 
 * `/data`: A folder with all necessary data. `commit_all_features.csv` is the original data used in the identified research paper for conducting their predictions. The authors of the research paper had filtered away some raw data, data which was required for this study. The remaining files in this folder relates to these changes made to this file.
   * `feature_extraction_modified.ipynb`:** A modified version of the original feature extraction file found in the authors replication package. The modification made is clearly stated in the file, and was inserted due to the need for obtaining the test only refactoring commits.
