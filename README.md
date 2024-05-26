@@ -18,4 +18,5 @@ Following that inital simulation, simulations were further conducted based upon 
   * `manipulation_of_test_column.ipynb`: After obtaning the raw data which had been filtered out by the authors, it was required to be formatted to fit the models designed in this study. This file contains these formattings made. It was in this study not achieved to obtain the raw data for all features. The four features missing this data is also investigated here.
   * `commit_level_features_w_test_modified.csv`: The csv obtained after the transformation of column layout.
   * `commit_level_features_w_test_modified_small.csv`: Subset of the above file, only containing the features utilized in the models used when conducting the analysis with empirical data.
-  * `feature_ref_level.csv` & `rMinerRefactorings.csv`: Original files from the research paper. They are required in orde to run the `feature_extraction_modified.ipynb` file.
+
+To run the `feature_extraction_modified.ipynb` file, it is **required** to have the `rMinerRefactorings.csv` in the same folder as the notebook. It is a large file, and was therefore not possible to provide in this repository. Instead, it can be found in the replication package of the studied research paper: https://zenodo.org/records/5979790.
