@@ -20,8 +20,8 @@ dat = genData(n, def)
 dlist_tot_standardized <- list(
   SR = dat$SR,
   TR = dat$TR,
-  R_LOC = standardize(dat$R_LOC),
-  R_Locations = standardize(dat$R_Locations)
+  R_LOC = scale(dat$R_LOC),
+  R_Locations = scale(dat$R_Locations)
 )
 
 # Creating Models
@@ -46,6 +46,14 @@ tot_collider <- brm(TR ~ SR + R_LOC + R_Locations,
 #########################
 summary(tot_no_collider)
 summary(tot_collider)
+
+# Compare models using loo_compare
+tot_no_collider <- add_criterion(tot_no_collider, criterion = "loo")
+tot_collider <- add_criterion(tot_collider, criterion = "loo")
+
+
+comparison <- loo_compare(tot_no_collider, tot_collider)
+comparison
 
 
 # Diagnostics: Traceplots

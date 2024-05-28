@@ -22,8 +22,8 @@ sampled_data <- dataset %>%
 dlist_emp_standardized <- list(
   TR = sampled_data$TR,
   SR = sampled_data$SR,
-  R_LOC = standardize(sampled_data$rightLocationDiff),
-  R_Locations = standardize(sampled_data$rightLocationCount)
+  R_LOC = scale(sampled_data$rightLocationDiff),
+  R_Locations = scale(sampled_data$rightLocationCount)
 )
 
 

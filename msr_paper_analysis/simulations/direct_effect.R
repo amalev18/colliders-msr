@@ -60,20 +60,20 @@ hist(rpois(n, lambda))
 # Standardize all features, not treatment and outcome
 dlist_dir_standardized <- list(
   TR = dat$TR,
-  RefAge = standardize(dat$RefAge),
-  DevRefExp = standardize(dat$DevRefExp),
-  L_Locations = standardize(dat$L_Locations), 
-  L_LOC = standardize(dat$L_LOC),
-  DevRefComExp = standardize(dat$DevRefComExp),
-  PrevRef = standardize(dat$PrevRef), 
+  RefAge = scale(dat$RefAge),
+  DevRefExp = scale(dat$DevRefExp),
+  L_Locations = scale(dat$L_Locations), 
+  L_LOC = scale(dat$L_LOC),
+  DevRefComExp = scale(dat$DevRefComExp),
+  PrevRef = scale(dat$PrevRef), 
   SR = dat$SR,
-  NmbRef = standardize(dat$NmbRef),
-  NmbRefType_UQ = standardize(dat$NmbRefType_UQ),
-  NmbCodeElem_UQ = standardize(dat$NmbCodeElem_UQ),
-  NmbFiles = standardize(dat$NmbFiles),
-  AvgNmbFiles = standardize(dat$AvgNmbFiles), 
-  R_Locations = standardize(dat$R_Locations), 
-  R_LOC = standardize(dat$R_LOC) 
+  NmbRef = scale(dat$NmbRef),
+  NmbRefType_UQ = scale(dat$NmbRefType_UQ),
+  NmbCodeElem_UQ = scale(dat$NmbCodeElem_UQ),
+  NmbFiles = scale(dat$NmbFiles),
+  AvgNmbFiles = scale(dat$AvgNmbFiles), 
+  R_Locations = scale(dat$R_Locations), 
+  R_LOC = scale(dat$R_LOC) 
 )
 
 
@@ -101,6 +101,12 @@ dir_collider <- brm(TR ~ SR + L_Locations + L_LOC + NmbFiles + NmbRef + NmbRefTy
 summary(dir_no_collider)
 summary(dir_collider)
 
+# Compare models using loo_compare
+dir_no_collider <- add_criterion(dir_no_collider, criterion = "loo")
+dir_collider <- add_criterion(dir_collider, criterion = "loo")
+
+comparison <- loo_compare(dir_no_collider, dir_collider)
+comparison
 
 # Diagnostics: Traceplots
 #########################
