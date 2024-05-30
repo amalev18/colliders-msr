@@ -118,8 +118,8 @@ mcmc_trace(draws_dir_collider)
 
 # Posterior Predictive Checks
 #########################
-pp_check(dir_no_collider, type = "bars", ndraws = 100)
-pp_check(dir_collider, type = "bars", ndraws = 100)
+pp_check(dir_no_collider, type = "bars", ndraws = 100)[1]
+pp_check(dir_collider, type = "bars", ndraws = 100)[1]
 
 
 # Prior predictive checks

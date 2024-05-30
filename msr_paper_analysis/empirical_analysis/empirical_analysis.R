@@ -3,6 +3,9 @@ library(brms)
 library(bayesplot)
 library(posterior)
 library(dplyr)
+library(gridExtra)
+library(ggplot2)
+
 
 # Loading Data 
 #########################
@@ -61,5 +64,12 @@ mcmc_trace(draws_emp_collider)
 
 # Posterior Predictive Checks
 #########################
-pp_check(emp_no_collider, type = "bars", ndraws = 100)
-pp_check(emp_collider, type = "bars", ndraws = 100)
+pp_check(emp_no_collider, type = "bars", ndraws = 100)[1]
+pp_check(emp_collider, type = "bars", ndraws = 100)[1]
+
+pp_check_no_collider <- pp_check(emp_no_collider, type = "bars", ndraws = 100) +
+  ggtitle("No Collider Model")
+pp_check_collider <- pp_check(emp_collider, type = "bars", ndraws = 100) + 
+  ggtitle("Collider Model")
+
+grid.arrange(pp_check_no_collider, pp_check_collider, ncol = 2)
