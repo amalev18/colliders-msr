@@ -6,7 +6,7 @@ library(posterior)
 set.seed(42)
 
 # Number of samples
-n <- 2000
+n <- 8000
 
 # Generate data with Simstudy
 #########################
@@ -55,6 +55,12 @@ mcmc_trace(draws_no_collider)
 mcmc_trace(draws_collider)
 
 
+# Posterior Predictive Checks
+#########################
+pp_check(no_collider, ndraws = 30)
+pp_check(collider, ndraws = 30)
+
+
 # Prior Predictive Checks
 #########################
 # Run both models using only the priors
@@ -75,7 +81,6 @@ priors_collider <- as_draws_df(m0_collider)
 # Create desnity plots for the prior samples
 mcmc_dens(priors_no_collider, pars = c("b_Intercept", "b_DevExp"))
 mcmc_dens(priors_collider, pars = c("b_Intercept", "b_DevExp", "b_Bugs"))
-
 
 
 

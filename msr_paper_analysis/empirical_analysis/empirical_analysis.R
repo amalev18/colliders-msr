@@ -2,6 +2,7 @@ library(simstudy)
 library(brms)
 library(bayesplot)
 library(posterior)
+library(dplyr)
 
 # Loading Data 
 #########################
@@ -11,8 +12,7 @@ dataset <- read.csv('data/commit_level_features_w_test_transformed_small.csv')
 dataset
 
 # Number of samples
-percentage <- 0.1
-n <- percentage*nrow(dataset)
+n <- 8000
 
 # Retrieve the number of samples wanted from the empirical data
 sampled_data <- dataset %>% 

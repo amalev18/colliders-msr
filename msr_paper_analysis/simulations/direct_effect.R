@@ -6,7 +6,7 @@ library(posterior)
 set.seed(1990)
 
 # Number of samples to generate
-n <- 5000
+n <- 8000
 
 # Generate data
 #########################
@@ -47,7 +47,7 @@ def <- defData(def, varname = "R_Locations", dist = "poisson", formula = "1 + 0.
 
 
 dat <- genData(n, def)
-
+print(mean(dat$DevRefExp))
 # Checks of the generated data. The numbers inserted in above generations were verified by plotting histograms.
 # It was made sure that the input values reflected the wanted behavior for the variable.
 mu <- 620
@@ -142,19 +142,21 @@ priors_no_collider <- as_draws_df(m0_dir_no_collider)
 priors_collider <- as_draws_df(m0_dir_collider)
 
 # Taking the inverse logit, due to the logit link function is being utilized in the models
-intercept_prior <- inv_logit(priors_no_collider$b_Intercept)
-SR_prior <- inv_logit(priors_no_collider$b_SR)
-R_LOC_prior <- inv_logit(priors_collider$b_R_LOC)
-R_Locations_prior <- inv_logit(priors_collider$b_R_Locations)
+priors_no_collider$b_Intercept <- plogis(priors_no_collider$b_Intercept)
+priors_no_collider$b_SR <- plogis(priors_no_collider$b_SR)
 
-# Create a 2x2 layout for the plots
-par(mfrow = c(2, 2))
+priors_collider$b_R_LOC <- plogis(priors_collider$b_R_LOC)
+priors_collider$R_Locations <- plogis(priors_collider$b_R_Locations)
 
-# Create density plots for prior samples
-dens(intercept_prior, adj = 0.1, main = "Alpha ~ dnorm(-1, 0.5)")
-dens(SR_prior, adj = 0.1, main = "b_SR ~ dnorm(0, 0.5)")
-dens(R_LOC_prior, adj = 0.1, main = "b_R_LOC ~ dnorm(0, 0.5)")
-dens(R_Locations_prior, adj = 0.1, main = "b_R_Locations ~ dnorm(0, 0.5)")
+# Create density plots for the prior samples
+mcmc_dens(priors_no_collider, pars = "b_Intercept")
+mcmc_dens(priors_no_collider, pars = "b_SR")
+
+mcmc_dens(priors_collider, pars = "b_R_LOC")
+mcmc_dens(priors_collider, pars = "b_R_Locations")
+
+
+
 
 
 
