@@ -11,7 +11,7 @@ n <- 8000
 # Generate data with Simstudy
 #########################
 def <- defData(varname = "DevExp", dist = "poisson", formula = 5) 
-def <- defData(def, varname = "LOC", dist = "normal", formula = "70 + 
+def <- defData(def, varname = "LOC", dist = "normal", formula = "70 - 
                0.95*DevExp", variance = 15) #approx normal
 def <- defData(def, varname = "Bugs", dist = "poisson", formula = "-5 + 0.08*LOC -
                0.40*DevExp", link = "log") 
